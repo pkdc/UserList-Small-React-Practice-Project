@@ -6,7 +6,7 @@ import UserList from "./components/Users/UsersList";
 function App() {
 	const [userList, setUserList] = useState([]);
 
-	const onSaveUserData = (data) => {
+	const saveUserDataHandler = (data) => {
 		console.log(data);
 		setUserList((prevList) => {
 			return [...prevList, data];
@@ -15,7 +15,7 @@ function App() {
 
 	return (
 		<div>
-			<AddUser pass={onSaveUserData} />
+			<AddUser onSaveUserData={saveUserDataHandler} />
 			<UserList userDataList={userList} />
 		</div>
 	);

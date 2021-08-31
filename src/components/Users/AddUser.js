@@ -24,17 +24,25 @@ const UserForm = (props) => {
 			id: Math.random().toString(),
 		};
 
-		props.pass(userData);
+		props.onSaveUserData(userData);
+
+		setUsername("");
+		setAge("");
 	};
 
 	return (
 		<Card>
 			<form onSubmit={submitHandler}>
 				<label htmlFor="uname">UserName</label>
-				<input type="string" id="uname" onChange={usernameChangeHandler} />
+				<input
+					type="string"
+					id="uname"
+					onChange={usernameChangeHandler}
+					value={username}
+				/>
 
 				<label htmlFor="age">Age (Years)</label>
-				<input type="number" id="age" onChange={ageChangeHandler} />
+				<input type="number" id="age" onChange={ageChangeHandler} value={age} />
 
 				<Button type="submit">Submit</Button>
 			</form>
