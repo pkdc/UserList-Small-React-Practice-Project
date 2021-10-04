@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import "./App.css";
 import AddUser from "./components/Users/AddUser";
-import UserList from "./components/Users/UsersList";
+import UsersList from "./components/Users/UsersList";
 
 function App() {
-	const [userList, setUserList] = useState([]);
+	const [usersList, setUsersList] = useState([]);
 
 	const saveUserDataHandler = (data) => {
 		console.log(data);
-		setUserList((prevList) => {
+		setUsersList((prevList) => {
 			return [...prevList, data];
 		});
 	};
@@ -16,7 +16,7 @@ function App() {
 	return (
 		<div>
 			<AddUser onSaveUserData={saveUserDataHandler} />
-			<UserList userDataList={userList} />
+			<UsersList usersDataList={usersList} />
 		</div>
 	);
 }

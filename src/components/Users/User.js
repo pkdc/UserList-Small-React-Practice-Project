@@ -1,15 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./User.module.css";
 
 const User = (props) => {
-	// const [hewUsername, setNewUsername] = useState("");
-	// const [newAge, setNewAge] = useState("");
-
-	// const addUserHandler = () => {
-	// 	setNewUsername(props.uData.username);
-	// 	setNewAge(props.uData.age);
-	// };
-
 	return (
 		<li className={styles["list-item"]}>
 			<span>{props.newUsername}</span>

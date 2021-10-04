@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import User from "./User";
 import Card from "../UI/Card";
 
-const UserList = (props) => {
+const UsersList = (props) => {
 	return (
 		<Card>
 			<ul>
-				{props.userDataList.map((userData) => (
+				{props.usersDataList.map((userData) => (
 					<User
 						key={userData.id}
 						newUsername={userData.username}
@@ -18,4 +18,4 @@ const UserList = (props) => {
 	);
 };
 
-export default UserList;
+export default UsersList;

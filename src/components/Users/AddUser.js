@@ -2,59 +2,68 @@ import React, { useState } from "react";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 
-import "./AddUser.module.css";
+import styles from "./AddUser.module.css";
 
 const UserForm = (props) => {
-	const [username, setUsername] = useState("");
-	const [age, setAge] = useState("");
+	const [enteredUsername, setEnteredUsername] = useState("");
+	const [enteredAge, setEnteredAge] = useState("");
 
 	const usernameChangeHandler = (event) => {
-		setUsername(event.target.value);
+		setEnteredUsername(event.target.value);
 	};
 	const ageChangeHandler = (event) => {
-		setAge(+event.target.value);
+		// "+" casts the value to int
+		setEnteredAge(+event.target.value);
 	};
 
 	const submitHandler = (event) => {
 		event.preventDefault();
 
-		if (username.length === 0) {
-			alert("Please enter username");
-			return null;
+		// not working
+		if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
+			// alert("Please enter username");
+			// return null;
+			return;
 		}
 
-		if (age < 0) {
-			alert("Please enter a valid age");
-			return null;
+		if (enteredAge < 0) {
+			// alert("Please enter a valid age");
+			// return null;
+			return;
 		}
 
 		const userData = {
-			username: username,
-			age: age,
+			username: enteredUsername,
+			age: enteredAge,
 			id: Math.random().toString(),
 		};
 
 		props.onSaveUserData(userData);
 
-		setUsername("");
-		setAge("");
+		setEnteredUsername("");
+		setEnteredAge("");
 	};
 
 	return (
-		<Card>
+		<Card cardClassName={styles.inputForm}>
 			<form onSubmit={submitHandler}>
-				<label htmlFor="uname">UserName</label>
+				<label htmlFor="uname">Username</label>
 				<input
 					type="string"
 					id="uname"
 					onChange={usernameChangeHandler}
-					value={username}
+					value={enteredUsername}
 				/>
 
 				<label htmlFor="age">Age (Years)</label>
-				<input type="number" id="age" onChange={ageChangeHandler} value={age} />
+				<input
+					type="number"
+					id="age"
+					onChange={ageChangeHandler}
+					value={enteredAge}
+				/>
 
-				<Button type="submit">Submit</Button>
+				<Button btnType="submit">Submit</Button>
 			</form>
 		</Card>
 	);
