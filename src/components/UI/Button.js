@@ -7,6 +7,7 @@ const Button = (props) => {
 	return (
 		<button
 			className={combinedClasses}
+			// provide a fallback in case that the type is not being set
 			type={props.btnType || "button"}
 			onClick={props.btnOnClick}
 		>
