@@ -8,6 +8,7 @@ import styles from "./AddUser.module.css";
 const AddUser = (props) => {
 	const [enteredUsername, setEnteredUsername] = useState("");
 	const [enteredAge, setEnteredAge] = useState("");
+	const [error, setError] = useState();
 
 	const usernameChangeHandler = (event) => {
 		setEnteredUsername(event.target.value);
@@ -21,6 +22,10 @@ const AddUser = (props) => {
 
 		// not entered any value
 		if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
+			setError({
+				title: "Something's Missing",
+				message: "Please enter username and age",
+			});
 			// error = <ErrorModal>Please enter username and age</ErrorModal>;
 			// alert("Please enter username");
 			// return null;
@@ -29,6 +34,10 @@ const AddUser = (props) => {
 		}
 
 		if (+enteredAge < 0) {
+			setError({
+				title: "Invalid Age",
+				message: "Please enter a valid age",
+			});
 			// error = <ErrorModal>Please enter a valid age</ErrorModal>;
 			// alert("Please enter a valid age");
 			// return null;
@@ -46,11 +55,22 @@ const AddUser = (props) => {
 
 		setEnteredUsername("");
 		setEnteredAge("");
+		setError("");
+	};
+
+	const closeModalHandler = () => {
+		setError(null);
 	};
 
 	return (
-		<div>		
-			<ErrorModal title="Error!!" message="Please fix the error"/>
+		<div>
+			{error && (
+				<ErrorModal
+					onClose={closeModalHandler}
+					title={error.title}
+					message={error.message}
+				/>
+			)}
 			<Card cardClassName={styles.inputForm}>
 				<form onSubmit={submitHandler}>
 					<label htmlFor="uname">Username</label>
@@ -71,7 +91,6 @@ const AddUser = (props) => {
 
 					<Button btnType="submit">Submit</Button>
 				</form>
-				
 			</Card>
 		</div>
 	);
